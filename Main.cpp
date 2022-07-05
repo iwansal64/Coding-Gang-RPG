@@ -7,6 +7,6 @@ using namespace std;
 
 int main(){
   
-  cout << "Yoi" << endl;
+  cout << "Test2" << endl;
   
 }
