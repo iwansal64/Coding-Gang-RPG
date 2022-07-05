@@ -9,28 +9,33 @@ using namespace std;
 
 int main(){ 
   
+    // Player Stats
     map<string, int> YourData = {
         {"Health", 100},
         {"Damage", 10},
         {"CritRate", 15},
         {"CritDamage", 5},
-        {"Speed", 20}
+        {"Speed", 20},
+        {"Heal", 20}
     };
 
     int *YourHealth = &YourData["Health"];
     int *YourDamage = &YourData["Damage"];
     int *YourCritDamage = &YourData["CritDamage"];
-    unsigned short *YourCritRate = &YourData["CritRate"];
-    unsigned short *YourSpeed = &YourData["Speed"];
+    int *YourCritRate = &YourData["CritRate"];
+    int *YourSpeed = &YourData["Speed"];
+    int *YourHeal = &YourData["Heal"];
 
-
-/////////////////////////////////////////////////////////////////////// 
-    void BarPrint(int PrintObject){
-        for(int i = 0;i < PrintObject;i++){
-            cout << "+";
-        }
-        cout << endl; 
+    // Enemy Stats
+    map<string, int> EnemyData = {
+        {"Health", 100},
+        {"Damage", 10}
     }
+
+    int *EnemyHealth = &EnemyData["Health"];
+    int *EnemyDamage = &EnemyData["Damage"];
+
+
 ///////////////////////////////////////////////////////////////////////
     flagA:
 //////////////////////////////////////////////////////////////////////
@@ -44,8 +49,8 @@ int main(){
       4 : NotChinese
      )";
 
-    unsigned short* Option = new unsigned short(0);
-    unsigned short* CharaOption = new unsigned short(0);
+    unsign_short* Option = new unsign_short(0);
+    unsign_short* CharaOption = new unsign_short(0);
 
     cin >> *CharaOption;
 
@@ -54,7 +59,12 @@ int main(){
         goto flagA; 
     } 
     
-    YourData = HeroesData::heroes[HeroesData::heroNames[CharaOption]];
+    *YourData["Health"] = HeroesData::heroes[HeroesData::heroNames[CharaOption]]["Health"];
+    *YourData["Damage"] = HeroesData::heroes[HeroesData::heroNames[CharaOption]]["Damage"];
+    *YourData["CritRate"] = HeroesData::heroes[HeroesData::heroNames[CharaOption]]["CritRate"];
+    *YourData["CritDamage"] = HeroesData::heroes[HeroesData::heroNames[CharaOption]]["CritDamage"];
+    *YourData["Speed"] = HeroesData::heroes[HeroesData::heroNames[CharaOption]]["Speed"];
+    *YourData["Heal"] = HeroesData::heroes[HeroesData::heroNames[CharaOption]]["Heal"];
     
     
     cout << "start game?" << endl;
@@ -71,6 +81,8 @@ int main(){
             goto flagA;
         }
     }
+
+    *EnemyDamage = rand()
         
 
     while(YourHealth > 0 && EnemyHealth > 0){
@@ -86,54 +98,61 @@ int main(){
 
 
         if(*Option == 1){
-            cout << PlayerName << " " << "Choose " << "ATTACK" << "!" << endl;
-            EnemyHealth -= 1;
+            cout << PlayerName << " " << "Choose ATTACK!" << endl;
+            cout << "Your damage : " << *YourDamage << endl;
+            *EnemyHealth -= *YourDamage;
             cout << "=======================================" << endl;
             cout << "Your Health    : ";
             BarPrint(YourHealth);
             cout << "Enemy's Health : ";
             BarPrint(EnemyHealth);
+            cout << endl;
 
         }
         else if(*Option == 2){
-                cout << PlayerName << " " << "Choose " << "HEAL" << "!" << endl;
-            YourHealth += 1;
+            cout << PlayerName << " " << "Choose HEAL!" << endl;
+            cout << "You heal : " << *YourHeal << " hp!" << endl;
+            *YourHealth += *YourHeal;
             cout << "=======================================" << endl;
             cout << "Your Health    : ";
             BarPrint(YourHealth);
             cout << "Enemy's Health : ";
             BarPrint(EnemyHealth);
+            cout << endl;
         }
         else if(*Option == 3){
-            cout << PlayerName << " " << "Choose " << "SUICIDE" << "!" << endl;
-            YourHealth -= YourHealth;
+            cout << PlayerName << " " << "Choose SUICIDE!" << endl;
+            *YourHealth = 0;
             cout << "=======================================" << endl;
             cout << "Your Health    : ";
             BarPrint(YourHealth);
             cout << "Enemy's Health : ";
             BarPrint(EnemyHealth);
+            cout << endl;
             
         }
 
-        BotChoice = rand()% 3;
+        BotChoice = random(0, 2, true);
         if(BotChoice == 1){
             cout << "Bot" << " " << "Choose " << "ATTACK" << "!" << endl;
-            YourHealth -= 1;
+            cout << "Damage : " << *EnemyDamage << endl << endl;
+            *YourHealth -= *EnemyDamage;
             cout << "=======================================" << endl;
             cout << "Your Health    : ";
             BarPrint(YourHealth);
             cout << "Enemy's Health : ";
             BarPrint(EnemyHealth);
-
+            cout << endl;
         }
         else if(BotChoice == 2){
             cout << "Bot" << " " << "Choose " << "HEAL" << "!" << endl;
-            EnemyHealth += 1;
+            *EnemyHealth += 1;
             cout << "=======================================" << endl;
             cout << "Your Health    : ";
             BarPrint(YourHealth);
             cout << "Enemy's Health : ";
             BarPrint(EnemyHealth);
+            cout << endl;
         }
 
     

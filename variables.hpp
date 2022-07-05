@@ -4,7 +4,7 @@
 #include "requirements.hpp"
 using namespace std;
 
-typedef unsigned short indexType;
+typedef unsigned short unsign_short;
 namespace HeroesData {
     int numberOfHeroes = 3;
     
@@ -20,29 +20,33 @@ namespace HeroesData {
             {"Health", 80},    // Normalnya 100 | mungkin nanti damage musuh nya rata rata 10
             {"Damage", 15},    // Normalnya 10  | mungkin nanti darah musuh nya rata rata 100
             {"CritRate", 20},  // Antara 0% - 100% kemungkinan terjadinya critical
-            {"CritDamage", 3}, // Itung itungannya damage = damage * critDamage (kalo dapet critical)
-            {"Speed", 20}      // Antara 0% - 100% Semakin besar kemungkinan kita maka kena serangan musuh semakin kecil
-        }}, // Kalo mau nambahin stats boleh aja yg penting itu bagus gak di jalanin di cli
+            {"CritDamage", 4}, // Itung itungannya damage = damage * critDamage (kalo dapet critical)
+            {"Speed", 20},     // Antara 0% - 100% Semakin besar kemungkinan kita maka kena serangan musuh semakin kecil
+            {"Heal", 12}       // Normalnya 10 - 100% Semakin besar kemungkinan kita maka kena serangan musuh semakin kecil
+        }},
         {"Ren", {
             {"Health", 100},
             {"Damage", 10},
             {"CritRate", 15},
             {"CritDamage", 5},
-            {"Speed", 20}
+            {"Speed", 20},
+            {"Heal", 10}
         }},
         {"KURO", {
             {"Health", 100},
             {"Damage", 10},
             {"CritRate", 15},
             {"CritDamage", 5},
-            {"Speed", 20}
+            {"Speed", 20},
+            {"Heal", 10}
         }},
         {"Not Chinese", {
             {"Health", 90},
             {"Damage", 7},
             {"CritRate", 36},
             {"CritDamage", 5},
-            {"Speed", 55}
+            {"Speed", 55},
+            {"Heal", 10}
         }}
     };
 
