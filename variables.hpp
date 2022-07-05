@@ -15,7 +15,7 @@ namespace HeroesData {
             {"Damage", 15},    // Normalnya 10  | mungkin nanti darah musuh nya rata rata 100
             {"CritRate", 20},  // Antara 0% - 100% kemungkinan terjadinya critical
             {"CritDamage", 3}, // Itung itungannya damage = damage * critDamage (kalo dapet critical)
-            {"Speed", 20}      // Antara 0% - 100% Semakin besar kemungkinan kita kena serangan musuh semakin kecil
+            {"Speed", 20}      // Antara 0% - 100% Semakin besar kemungkinan kita maka kena serangan musuh semakin kecil
         }}, // Kalo mau nambahin stats boleh aja yg penting itu bagus gak di jalanin di cli
         {"Ren", {
             {"Health", 100},
@@ -32,11 +32,11 @@ namespace HeroesData {
             {"Speed", 20}
         }},
         {"Not Chinese", {
-            {"Health", 100},
-            {"Damage", 10},
-            {"CritRate", 15},
+            {"Health", 90},
+            {"Damage", 7},
+            {"CritRate", 36},
             {"CritDamage", 5},
-            {"Speed", 20}
+            {"Speed", 55}
         }}
     };
 }
