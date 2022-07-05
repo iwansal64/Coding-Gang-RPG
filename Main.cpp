@@ -1,12 +1,19 @@
-#include <iostream>
-#include <cstdlib>
-#include <cmath>
-#include <string>
+#include "requirements.hpp"
 
 using namespace std;
 
-int main(){
+template<typename datatype, int size>
+void printArray(array<datatype, size> vec) {
+  for (datatype i : vec) {
+    cout << i << endl;
+  }
+}
+
+
+
+int main(){ 
   
-  cout << "Test2" << endl;
-  
+  array<int, 5>* dataList = new array<int, 5>();
+  printArray<int, 5>(*dataList);
+
 }
