@@ -1,4 +1,5 @@
 #include "requirements.hpp"
+using namespace std;
 
 namespace HeroesData {
     std::map<int, std::string> heroNames = {
