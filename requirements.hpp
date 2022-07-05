@@ -2,8 +2,8 @@
 #pragma once
 
 #include <iostream>
-#include <cstdlib>//afk
-#include <cmath> //ok bntr mau gosok gigi
+#include <cstdlib>
+#include <cmath> 
 #include <string>
 #include <array>
 #include <map>

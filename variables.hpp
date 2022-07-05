@@ -8,7 +8,7 @@ typedef unsigned short indexType;
 namespace HeroesData {
     int numberOfHeroes = 3;
     
-    map<unsigned short, string> heroNames = { // kayak array
+    map<unsigned short, string> heroNames = {
         {0, "Wann"},
         {1, "Ren"},
         {2, "KURO"},

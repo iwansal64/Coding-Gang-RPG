@@ -9,20 +9,19 @@ using namespace std;
 
 int main(){ 
   
-    map<string, int>* YourData = new map<string, int>();
-    YourData = {
+    map<string, int> YourData = {
         {"Health", 100},
         {"Damage", 10},
         {"CritRate", 15},
         {"CritDamage", 5},
         {"Speed", 20}
-    }
+    };
 
-    int YourHealth = *YourData["Health"];
-    int YourDamage = *YourData["Damage"];
-    int YourCritDamage = *YourData["CritDamage"];
-    unsigned short YourCritRate = *YourData["CritRate"];
-    unsigned short YourSpeed = *YourData["Speed"];
+    int *YourHealth = &YourData["Health"];
+    int *YourDamage = &YourData["Damage"];
+    int *YourCritDamage = &YourData["CritDamage"];
+    unsigned short *YourCritRate = &YourData["CritRate"];
+    unsigned short *YourSpeed = &YourData["Speed"];
 
 
 /////////////////////////////////////////////////////////////////////// 
@@ -57,10 +56,7 @@ int main(){
     
     YourData = HeroesData::heroes[HeroesData::heroNames[CharaOption]];
     
-    cout << YourData["Health"] << endl;
-    cout << YourHealth << endl;//cara outputnya gimana ?lupa gw //a.out?/a.out?
-    exit(0);
- 
+    
     cout << "start game?" << endl;
     cout << "1 = Yes" << endl;
     cout << "2 = No" << endl;
