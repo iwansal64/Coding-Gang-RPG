@@ -46,6 +46,7 @@ int main(){
     cin >> PlayerName;
 
     flagA:
+    system(clearScreen);
     cout << "=====[ Coding Gang RPG ]=====" << endl << endl;
     cout << "Select character : " << endl;
     cout << R"(
@@ -61,8 +62,8 @@ int main(){
     cin >> *CharaOption;
 
     if (*CharaOption > HeroesData::numberOfHeroes ) { 
-        cout << "can't be more than " << HeroesData::numberOfHeroes;
-        goto flagA; 
+        cout << "can't be more than " << HeroesData::numberOfHeroes << endl;
+        goto flagA;
     } 
     
     map<string, int>* dataTemp = new map<string, int>();
@@ -78,16 +79,15 @@ int main(){
     delete dataTemp;
     
     
-    cout << "start game?" << endl;
-    cout << "1 = Yes" << endl;
-    cout << "2 = No" << endl;
-    cin >> *Option;
     
 
     while(*Option != 1){
-
+        
+        cout << "start game?" << endl;
+        cout << "1 = Yes" << endl;
+        cout << "2 = No" << endl;
         cin >> *Option;
-
+        
         if(*Option ==2){
             goto flagA;
         }
@@ -144,43 +144,59 @@ int main(){
             
         }
 
-        BotChoice = random(0, 2, true);
-        if(BotChoice == 1){
-            cout << "Bot" << " " << "Choose " << "ATTACK" << "!" << endl;
-            cout << "Damage : " << *EnemyDamage << endl << endl;
-            *YourHealth -= *EnemyDamage;
-            cout << "=======================================" << endl;
-            cout << "Your Health    : ";
-            BarPrint(*YourHealth);
-            cout << "Enemy's Health : ";
-            BarPrint(*EnemyHealth);
-            cout << endl;
-        }
-        else if(BotChoice == 2){
-            cout << "Bot" << " " << "Choose " << "HEAL" << "!" << endl;
-            *EnemyHealth += 1;
-            cout << "=======================================" << endl;
-            cout << "Your Health    : ";
-            BarPrint(*YourHealth);
-            cout << "Enemy's Health : ";
-            BarPrint(*EnemyHealth);
-            cout << endl;
-        }
+        sleep(500);
 
-    
+        if(*EnemyHealth > 0) {
+            BotChoice = random(0, 2, true);
+            system(clearScreen);
+            if(BotChoice == 1){
+                cout << "Bot" << " " << "Choose " << "ATTACK" << "!" << endl;
+                cout << "Damage : " << *EnemyDamage << endl << endl;
+                *YourHealth -= *EnemyDamage;
+                cout << "=======================================" << endl;
+                cout << "Your Health    : ";
+                BarPrint(*YourHealth);
+                cout << "Enemy's Health : ";
+                BarPrint(*EnemyHealth);
+                cout << endl;
+            }
+            else if(BotChoice == 2){
+                cout << "Bot" << " " << "Choose " << "HEAL" << "!" << endl;
+                *EnemyHealth += 1;
+                cout << "=======================================" << endl;
+                cout << "Your Health    : ";
+                BarPrint(*YourHealth);
+                cout << "Enemy's Health : ";
+                BarPrint(*EnemyHealth);
+                cout << endl;
+            }
+
+            sleep(1500);
+        }
     }
+    sleep(1000);
+    system(clearScreen);
     if(*YourHealth == 0){
         cout << endl << endl;
         cout << "You lose lol" << endl;
+        WinnerName = "Bot";
+        sleep(2500);
     }
     else if(*EnemyHealth == 0){
         cout << endl << endl;
         cout << "You win lol" << endl;
         WinnerName = PlayerName;
-
-
-        goto flagA;
+        sleep(2500);
     }
     
+    string *YOrN = new string(); // Sumpah jelek bet penamaan ny maap
+    cout << "Mau lagi y/n? ";
+    cin >> *YOrN;
+
+    if (*YOrN == "y") {
+        delete YOrN;
+        goto flagA;
+    }
+
 }
 
