@@ -9,6 +9,9 @@ using namespace std;
 
 int main(){ 
   
+    string WinnerName;
+    string PlayerName;
+    
     // Player Stats
     map<string, int> YourData = {
         {"Health", 100},
@@ -26,6 +29,7 @@ int main(){
     int *YourSpeed = &YourData["Speed"];
     int *YourHeal = &YourData["Heal"];
 
+
     // Enemy Stats
     map<string, int> EnemyData = {
         {"Health", 100},
@@ -34,13 +38,15 @@ int main(){
 
     int *EnemyHealth = &EnemyData["Health"];
     int *EnemyDamage = &EnemyData["Damage"];
+    int BotChoice = 0;
 
 
 ///////////////////////////////////////////////////////////////////////
-    flagA:
-//////////////////////////////////////////////////////////////////////
-    cout << "=====[ Coding Gang RPG ]=====" << endl << endl;
+    cout << "What is your name : ";
+    cin >> PlayerName;
 
+    flagA:
+    cout << "=====[ Coding Gang RPG ]=====" << endl << endl;
     cout << "Select character : " << endl;
     cout << R"(
       1 : Wann
@@ -54,17 +60,17 @@ int main(){
 
     cin >> *CharaOption;
 
-    if (CharaOption > HeroesData::numberOfHeroes ) { 
+    if (*CharaOption > HeroesData::numberOfHeroes ) { 
         cout << "can't be more than " << HeroesData::numberOfHeroes;
         goto flagA; 
     } 
     
-    *YourData["Health"] = HeroesData::heroes[HeroesData::heroNames[CharaOption]]["Health"];
-    *YourData["Damage"] = HeroesData::heroes[HeroesData::heroNames[CharaOption]]["Damage"];
-    *YourData["CritRate"] = HeroesData::heroes[HeroesData::heroNames[CharaOption]]["CritRate"];
-    *YourData["CritDamage"] = HeroesData::heroes[HeroesData::heroNames[CharaOption]]["CritDamage"];
-    *YourData["Speed"] = HeroesData::heroes[HeroesData::heroNames[CharaOption]]["Speed"];
-    *YourData["Heal"] = HeroesData::heroes[HeroesData::heroNames[CharaOption]]["Heal"];
+    *YourData["Health"] = HeroesData::heroes[HeroesData::heroNames[*CharaOption]]["Health"];
+    *YourData["Damage"] = HeroesData::heroes[HeroesData::heroNames[*CharaOption]]["Damage"];
+    *YourData["CritRate"] = HeroesData::heroes[HeroesData::heroNames[*CharaOption]]["CritRate"];
+    *YourData["CritDamage"] = HeroesData::heroes[HeroesData::heroNames[*CharaOption]]["CritDamage"];
+    *YourData["Speed"] = HeroesData::heroes[HeroesData::heroNames[*CharaOption]]["Speed"];
+    *YourData["Heal"] = HeroesData::heroes[HeroesData::heroNames[*CharaOption]]["Heal"];
     
     
     cout << "start game?" << endl;
@@ -73,19 +79,20 @@ int main(){
     cin >> *Option;
     
 
-    while(Option != 1){
+    while(*Option != 1){
 
         cin >> *Option;
 
-        if(Option ==2){
+        if(*Option ==2){
             goto flagA;
         }
     }
 
-    *EnemyDamage = rand()
+    *EnemyDamage = (int) random(5, 15, true);
+    *EnemyHealth = (int) random(90, 110);
         
 
-    while(YourHealth > 0 && EnemyHealth > 0){
+    while(*YourHealth > 0 && *EnemyHealth > 0){
         cout << "=============================================" << endl;
         cout << "Option : " << endl;
         cout << "1.Attack" << endl;
@@ -103,9 +110,9 @@ int main(){
             *EnemyHealth -= *YourDamage;
             cout << "=======================================" << endl;
             cout << "Your Health    : ";
-            BarPrint(YourHealth);
+            BarPrint(*YourHealth);
             cout << "Enemy's Health : ";
-            BarPrint(EnemyHealth);
+            BarPrint(*EnemyHealth);
             cout << endl;
 
         }
@@ -115,9 +122,9 @@ int main(){
             *YourHealth += *YourHeal;
             cout << "=======================================" << endl;
             cout << "Your Health    : ";
-            BarPrint(YourHealth);
+            BarPrint(*YourHealth);
             cout << "Enemy's Health : ";
-            BarPrint(EnemyHealth);
+            BarPrint(*EnemyHealth);
             cout << endl;
         }
         else if(*Option == 3){
@@ -125,9 +132,9 @@ int main(){
             *YourHealth = 0;
             cout << "=======================================" << endl;
             cout << "Your Health    : ";
-            BarPrint(YourHealth);
+            BarPrint(*YourHealth);
             cout << "Enemy's Health : ";
-            BarPrint(EnemyHealth);
+            BarPrint(*EnemyHealth);
             cout << endl;
             
         }
@@ -139,9 +146,9 @@ int main(){
             *YourHealth -= *EnemyDamage;
             cout << "=======================================" << endl;
             cout << "Your Health    : ";
-            BarPrint(YourHealth);
+            BarPrint(*YourHealth);
             cout << "Enemy's Health : ";
-            BarPrint(EnemyHealth);
+            BarPrint(*EnemyHealth);
             cout << endl;
         }
         else if(BotChoice == 2){
@@ -149,19 +156,19 @@ int main(){
             *EnemyHealth += 1;
             cout << "=======================================" << endl;
             cout << "Your Health    : ";
-            BarPrint(YourHealth);
+            BarPrint(*YourHealth);
             cout << "Enemy's Health : ";
-            BarPrint(EnemyHealth);
+            BarPrint(*EnemyHealth);
             cout << endl;
         }
 
     
     }
-    if(YourHealth == 0){
+    if(*YourHealth == 0){
         cout << endl << endl;
         cout << "You lose lol" << endl;
     }
-    else if(EnemyHealth == 0){
+    else if(*EnemyHealth == 0){
         cout << endl << endl;
         cout << "You win lol" << endl;
         WinnerName = PlayerName;

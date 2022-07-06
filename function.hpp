@@ -24,7 +24,7 @@ float random(int min, int max, bool includeLast=false) {
 }
 
 void BarPrint(int PrintObject){
-    for(int i = 0;i < PrintObject;i++){
+    for(int i = 0;i < floor(PrintObject / 2);i++){
         cout << "+";
     }
     cout << endl; 

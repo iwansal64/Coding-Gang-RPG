@@ -8,7 +8,7 @@ typedef unsigned short unsign_short;
 namespace HeroesData {
     int numberOfHeroes = 3;
     
-    map<unsigned short, string> heroNames = {
+    map<unsign_short, string> heroNames = {
         {0, "Wann"},
         {1, "Ren"},
         {2, "KURO"},
@@ -57,38 +57,12 @@ namespace HeroesData {
         int Health;
         int CritRate;
         int CritDamage;
+        int Speed;
+        int Heal;
     }
 
-    character Wann;
-    Wann.Health     = 80;
-    Wann.Damage     = 15;
-    Wann.CritRate   = 20;
-    Wann.CritDamage = 3;
-    Wann.Speed      = 20;
-    
-    character Ren;
-    Ren.Health     = 100;
-    Ren.Damage     = 10;
-    Ren.CritRate   = 15;
-    Ren.CritDamage = 5;
-    Ren.Speed      = 20;
-    
-    character KURO;
-    KURO.Health     = 100;
-    KURO.Damage     = 10;
-    KURO.CritRate   = 15;
-    KURO.CritDamage = 5;
-    KURO.Speed      = 20;
-    
-    character NotChinese;
-    NotChinese.Health     = 85;
-    NotChinese.Damage     = 7;
-    NotChinese.CritRate   = 38;
-    NotChinese.CritDamage = 5;
-    NotChinese.Speed      = 55;
-    
-
-
-
-
+    character Wann = {15, 80, 20, 3, 20, 12};
+    character Ren = {10, 100, 15, 5, 20, 10};
+    character KURO = {10, 100, 15, 5, 20, 10};
+    character NotChinese = {7, 85, 38, 5, 55, 10};
 }
