@@ -9,20 +9,20 @@ namespace HeroesData {
     int numberOfHeroes = 3;
     
     map<unsign_short, string> heroNames = {
-        {0, "Wann"},
-        {1, "Ren"},
-        {2, "KURO"},
-        {3, "Not Chinese"},
+        {1, "Wann"},
+        {2, "Ren"},
+        {3, "KURO"},
+        {4, "Not Chinese"},
     };
 
     map<string, map<string, int>> heroes = {
         {"Wann", {
-            {"Health", 80},    // Normalnya 100 | mungkin nanti damage musuh nya rata rata 10
-            {"Damage", 15},    // Normalnya 10  | mungkin nanti darah musuh nya rata rata 100
-            {"CritRate", 20},  // Antara 0% - 100% kemungkinan terjadinya critical
+            {"Health", 80},    // Normalnya 100 | rata rata damage musuh nya 10
+            {"Damage", 15},    // Normalnya 10  | rata rata darah musuh nya 110
+            {"CritRate", 25},  // Antara 0% - 100% kemungkinan terjadinya critical
             {"CritDamage", 4}, // Itung itungannya damage = damage * critDamage (kalo dapet critical)
             {"Speed", 20},     // Antara 0% - 100% Semakin besar kemungkinan kita maka kena serangan musuh semakin kecil
-            {"Heal", 12}       // Normalnya 10 - 100% Semakin besar kemungkinan kita maka kena serangan musuh semakin kecil
+            {"Heal", 12}       // Normalnya 10
         }},
         {"Ren", {
             {"Health", 100},

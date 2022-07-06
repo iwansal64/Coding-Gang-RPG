@@ -33,11 +33,13 @@ int main(){
     // Enemy Stats
     map<string, int> EnemyData = {
         {"Health", 100},
-        {"Damage", 10}
+        {"Damage", 10},
+        {"Heal", 10}
     };
 
-    int *EnemyHealth = &EnemyData["Health"];
-    int *EnemyDamage = &EnemyData["Damage"];
+    int EnemyHealth;
+    int EnemyDamage;
+    int EnemyHeal;
     int BotChoice = 0;
 
 
@@ -77,7 +79,10 @@ int main(){
     YourData["Heal"] = dataTemp->operator[]("Heal");
 
     delete dataTemp;
-    
+
+    cout << "------- Your Data -------" << endl;
+    cout << "Name : " << HeroesData::heroNames[*CharaOption] << endl;
+    showPlayerData(YourData);
     
     
 
@@ -93,11 +98,16 @@ int main(){
         }
     }
 
-    *EnemyDamage = (int) random(5, 15, true);
-    *EnemyHealth = (int) random(90, 110, true);
-        
+    EnemyData["Damage"] = random(5, 15, true);
+    EnemyData["Health"] = random(100, 120, true);
+    EnemyData["Heal"] = floor(EnemyData["Health"] / 10);
+    
+    EnemyHealth = EnemyData["Health"];
+    EnemyDamage = EnemyData["Damage"];
+    EnemyHeal = EnemyData["Heal"];
+    
 
-    while(*YourHealth > 0 && *EnemyHealth > 0){
+    while(*YourHealth > 0 && EnemyHealth > 0){
         cout << "=============================================" << endl;
         cout << "Option : " << endl;
         cout << "1.Attack" << endl;
@@ -108,16 +118,24 @@ int main(){
         cin >> *Option;
 
 
-
+        system(clearScreen);
         if(*Option == 1){
             cout << PlayerName << " " << "Choose ATTACK!" << endl;
             cout << "Your damage : " << *YourDamage << endl;
-            *EnemyHealth -= *YourDamage;
+
+            if (random(0, 100, true) < *YourCritRate) {
+                cout << "CRITICAL! damage : " << *YourCritDamage << endl;
+                EnemyHealth -= (*YourDamage * *YourCritDamage);
+            }
+            else {
+                EnemyHealth -= *YourDamage;
+            }
+            
             cout << "=======================================" << endl;
             cout << "Your Health    : ";
             BarPrint(*YourHealth);
             cout << "Enemy's Health : ";
-            BarPrint(*EnemyHealth);
+            BarPrint(EnemyHealth);
             cout << endl;
 
         }
@@ -129,7 +147,7 @@ int main(){
             cout << "Your Health    : ";
             BarPrint(*YourHealth);
             cout << "Enemy's Health : ";
-            BarPrint(*EnemyHealth);
+            BarPrint(EnemyHealth);
             cout << endl;
         }
         else if(*Option == 3){
@@ -139,35 +157,34 @@ int main(){
             cout << "Your Health    : ";
             BarPrint(*YourHealth);
             cout << "Enemy's Health : ";
-            BarPrint(*EnemyHealth);
+            BarPrint(EnemyHealth);
             cout << endl;
             
         }
 
         sleep(500);
 
-        if(*EnemyHealth > 0) {
+        if(EnemyHealth > 0) {
             BotChoice = random(0, 2, true);
-            system(clearScreen);
             if(BotChoice == 1){
                 cout << "Bot" << " " << "Choose " << "ATTACK" << "!" << endl;
-                cout << "Damage : " << *EnemyDamage << endl << endl;
-                *YourHealth -= *EnemyDamage;
+                cout << "Damage : " << EnemyDamage << endl << endl;
+                *YourHealth -= EnemyDamage;
                 cout << "=======================================" << endl;
                 cout << "Your Health    : ";
                 BarPrint(*YourHealth);
                 cout << "Enemy's Health : ";
-                BarPrint(*EnemyHealth);
+                BarPrint(EnemyHealth);
                 cout << endl;
             }
             else if(BotChoice == 2){
                 cout << "Bot" << " " << "Choose " << "HEAL" << "!" << endl;
-                *EnemyHealth += 1;
+                EnemyHealth += EnemyHeal;
                 cout << "=======================================" << endl;
                 cout << "Your Health    : ";
                 BarPrint(*YourHealth);
                 cout << "Enemy's Health : ";
-                BarPrint(*EnemyHealth);
+                BarPrint(EnemyHealth);
                 cout << endl;
             }
 
@@ -177,17 +194,17 @@ int main(){
     sleep(1000);
     system(clearScreen);
     if(*YourHealth == 0){
-        cout << endl << endl;
         cout << "You lose lol" << endl;
         WinnerName = "Bot";
-        sleep(2500);
     }
-    else if(*EnemyHealth == 0){
-        cout << endl << endl;
+    else if(EnemyHealth == 0){
         cout << "You win lol" << endl;
         WinnerName = PlayerName;
-        sleep(2500);
     }
+
+    cout << "Data of enemy : " << endl;
+    showEnemyData(EnemyData);
+    sleep(2500);
     
     string *YOrN = new string(); // Sumpah jelek bet penamaan ny maap
     cout << "Mau lagi y/n? ";

@@ -24,8 +24,23 @@ float random(int min, int max, bool includeLast=false) {
 }
 
 void BarPrint(int PrintObject){
-    for(int i = 0;i < floor(PrintObject / 2);i++){
+    for(int i = 0;i < ceil(PrintObject / 10);i++){
         cout << "+";
     }
-    cout << endl; 
+    cout << endl;
+}
+
+void showPlayerData(map<string, int> &userData) {
+    cout << "Health     : " << userData["Health"] << endl;
+    cout << "Damage     : " << userData["Damage"] << endl;
+    cout << "CritRate   : " << userData["CritRate"] << endl;
+    cout << "CritDamage : " << userData["CritDamage"] << endl;
+    cout << "Speed      : " << userData["Speed"] << endl;
+    cout << "Heal       : " << userData["Heal"] << endl;
+}
+
+void showEnemyData(map<string, int> &enemyData) {
+    cout << "Health : " << enemyData["Health"] << endl; 
+    cout << "Damage : " << enemyData["Damage"] << endl; 
+    cout << "Heal   : " << enemyData["Heal"] << endl; 
 }
