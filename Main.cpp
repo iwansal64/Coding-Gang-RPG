@@ -34,7 +34,7 @@ int main(){
     map<string, int> EnemyData = {
         {"Health", 100},
         {"Damage", 10}
-    }
+    };
 
     int *EnemyHealth = &EnemyData["Health"];
     int *EnemyDamage = &EnemyData["Damage"];
@@ -65,12 +65,17 @@ int main(){
         goto flagA; 
     } 
     
-    *YourData["Health"] = HeroesData::heroes[HeroesData::heroNames[*CharaOption]]["Health"];
-    *YourData["Damage"] = HeroesData::heroes[HeroesData::heroNames[*CharaOption]]["Damage"];
-    *YourData["CritRate"] = HeroesData::heroes[HeroesData::heroNames[*CharaOption]]["CritRate"];
-    *YourData["CritDamage"] = HeroesData::heroes[HeroesData::heroNames[*CharaOption]]["CritDamage"];
-    *YourData["Speed"] = HeroesData::heroes[HeroesData::heroNames[*CharaOption]]["Speed"];
-    *YourData["Heal"] = HeroesData::heroes[HeroesData::heroNames[*CharaOption]]["Heal"];
+    map<string, int>* dataTemp = new map<string, int>();
+    *dataTemp = HeroesData::heroes[HeroesData::heroNames[*CharaOption]];
+
+    YourData["Health"] = dataTemp->operator[]("Health");
+    YourData["Damage"] = dataTemp->operator[]("Damage");
+    YourData["CritRate"] = dataTemp->operator[]("CritRate");
+    YourData["CritDamage"] = dataTemp->operator[]("CritDamage");
+    YourData["Speed"] = dataTemp->operator[]("Speed");
+    YourData["Heal"] = dataTemp->operator[]("Heal");
+
+    delete dataTemp;
     
     
     cout << "start game?" << endl;
@@ -89,7 +94,7 @@ int main(){
     }
 
     *EnemyDamage = (int) random(5, 15, true);
-    *EnemyHealth = (int) random(90, 110);
+    *EnemyHealth = (int) random(90, 110, true);
         
 
     while(*YourHealth > 0 && *EnemyHealth > 0){

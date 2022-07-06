@@ -59,7 +59,7 @@ namespace HeroesData {
         int CritDamage;
         int Speed;
         int Heal;
-    }
+    };
 
     character Wann = {15, 80, 20, 3, 20, 12};
     character Ren = {10, 100, 15, 5, 20, 10};
