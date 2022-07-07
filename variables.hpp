@@ -2,17 +2,19 @@
 #pragma once
 
 #include "requirements.hpp"
+#include "function.hpp"
 using namespace std;
 
 typedef unsigned short unsign_short;
+enum name_init {Wann=1, Ren, KURO, NotChinese};
 namespace HeroesData {
-    int numberOfHeroes = 3;
+    int numberOfHeroes = 4;
     
     map<unsign_short, string> heroNames = {
-        {1, "Wann"},
-        {2, "Ren"},
-        {3, "KURO"},
-        {4, "Not Chinese"},
+        {Wann, "Wann"},
+        {Ren, "Ren"},
+        {KURO, "KURO"},
+        {NotChinese, "Not Chinese"},
     };
 
     map<string, map<string, int>> heroes = {
@@ -49,6 +51,28 @@ namespace HeroesData {
             {"Heal", 10}
         }}
     };
+
+    void specialPower(string name, map<string, int> &playerData, int &enemyHealth, int &enemyDamage) {
+        name = toLowerCase(name);
+
+        // Heal + increase CritRate
+        if (name == "wann") {
+            playerData["Health"] += 10;
+            playerData["CritRate"] += 25;
+        }
+        // Desc
+        else if (name == "ren") {
+            
+        }
+        // Desc
+        else if (name == "kuro") {
+
+        }
+        // Desc
+        else if (name == "not chinese") {
+
+        }
+    }
 
 
 

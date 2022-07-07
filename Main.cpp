@@ -21,6 +21,8 @@ int main(){
         {"Speed", 20},
         {"Heal", 20}
     };
+    
+    string heroName;
 
     int *YourHealth = &YourData["Health"];
     int *YourDamage = &YourData["Damage"];
@@ -65,11 +67,13 @@ int main(){
 
     if (*CharaOption > HeroesData::numberOfHeroes ) { 
         cout << "can't be more than " << HeroesData::numberOfHeroes << endl;
+        sleep(1000);
         goto flagA;
     } 
     
     map<string, int>* dataTemp = new map<string, int>();
-    *dataTemp = HeroesData::heroes[HeroesData::heroNames[*CharaOption]];
+    heroName = HeroesData::heroNames[*CharaOption];
+    *dataTemp = HeroesData::heroes[heroName];
 
     YourData["Health"] = dataTemp->operator[]("Health");
     YourData["Damage"] = dataTemp->operator[]("Damage");
@@ -80,20 +84,23 @@ int main(){
 
     delete dataTemp;
 
+    cout << endl;
     cout << "------- Your Data -------" << endl;
-    cout << "Name : " << HeroesData::heroNames[*CharaOption] << endl;
+    cout << "Name      : " << PlayerName << endl;
+    cout << "Hero Name : " << heroName << endl;
     showPlayerData(YourData);
+    cout << endl << endl;
     
     
 
-    while(*Option != 1){
+    while(*Option != 2){
         
-        cout << "start game?" << endl;
+        cout << "change character?" << endl;
         cout << "1 = Yes" << endl;
         cout << "2 = No" << endl;
         cin >> *Option;
         
-        if(*Option ==2){
+        if(*Option ==1){
             goto flagA;
         }
     }
@@ -109,10 +116,12 @@ int main(){
 
     while(*YourHealth > 0 && EnemyHealth > 0){
         cout << "=============================================" << endl;
-        cout << "Option : " << endl;
+        cout << "                Select Action" << endl;
+        cout << "=============================================" << endl;
         cout << "1.Attack" << endl;
-        cout << "2.Heal yourself lol" << endl;
-        cout << "3.Suicide" << endl;
+        cout << "2.Healing" << endl;
+        cout << "3.Power" << endl;
+        cout << "4.Suicide" << endl;
 
         cout << "Choice : ";
         cin >> *Option;
@@ -123,7 +132,7 @@ int main(){
             cout << PlayerName << " " << "Choose ATTACK!" << endl;
             cout << "Your damage : " << *YourDamage << endl;
 
-            if (random(0, 100, true) < *YourCritRate) {
+            if (calculatePercent(*YourCritRate)) {
                 cout << "CRITICAL! damage : " << *YourCritDamage << endl;
                 EnemyHealth -= (*YourDamage * *YourCritDamage);
             }
@@ -150,7 +159,17 @@ int main(){
             BarPrint(EnemyHealth);
             cout << endl;
         }
-        else if(*Option == 3){
+        else if(*Option == 3) {
+            cout << PlayerName << " " << "use Ultimate Power!" << endl;
+            HeroesData::specialPower(heroName, YourData, EnemyHealth, EnemyDamage);
+            cout << "=======================================" << endl;
+            cout << "Your Health    : ";
+            BarPrint(*YourHealth);
+            cout << "Enemy's Health : ";
+            BarPrint(EnemyHealth);
+            cout << endl;
+        }
+        else if(*Option == 4){
             cout << PlayerName << " " << "Choose SUICIDE!" << endl;
             *YourHealth = 0;
             cout << "=======================================" << endl;

@@ -8,7 +8,7 @@ using namespace std;
 
 template<typename datatype, int size>
 void printArray(array<datatype, size> arr, string seperator=", ", string end="\n") {
-    unsign_short index = 0;
+    unsigned short index = 0;
     for (datatype i : arr) {
         cout << i;
         if (index != (arr.size() - 1)) {
@@ -26,6 +26,7 @@ float random(int min, int max, bool includeLast=false) {
 void BarPrint(int PrintObject){
     for(int i = 0;i < ceil(PrintObject / 10);i++){
         cout << "+";
+        sleep(50);
     }
     cout << endl;
 }
@@ -43,4 +44,26 @@ void showEnemyData(map<string, int> &enemyData) {
     cout << "Health : " << enemyData["Health"] << endl; 
     cout << "Damage : " << enemyData["Damage"] << endl; 
     cout << "Heal   : " << enemyData["Heal"] << endl; 
+}
+
+bool calculatePercent(int percent) {
+    return (random(0, 100, true) <= percent);
+}
+
+string toLowerCase(string &text) {
+    string returnValue = "";
+    
+    for (char i : text) {
+        returnValue += tolower(i);
+    }
+    return returnValue;
+}
+
+string toUpperCase(string &text) {
+    string returnValue = "";
+    
+    for (char i : text) {
+        returnValue += toupper(i);
+    }
+    return returnValue;
 }
