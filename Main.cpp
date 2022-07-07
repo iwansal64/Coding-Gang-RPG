@@ -113,8 +113,15 @@ int main(){
     EnemyDamage = EnemyData["Damage"];
     EnemyHeal = EnemyData["Heal"];
     
-
+    unsign_short iteration = 0;
     while(*YourHealth > 0 && EnemyHealth > 0){
+        iteration += 1;
+        if (!HeroesData::resetPower(heroName, YourData, EnemyHealth, EnemyDamage, iteration)) {
+            cout << "Your power has gone..." << endl;
+            sleep(1000);
+        }
+
+        playFlag:
         cout << "=============================================" << endl;
         cout << "                Select Action" << endl;
         cout << "=============================================" << endl;
@@ -122,6 +129,7 @@ int main(){
         cout << "2.Healing" << endl;
         cout << "3.Power" << endl;
         cout << "4.Suicide" << endl;
+        cout << "5.Status" << endl;
 
         cout << "Choice : ";
         cin >> *Option;
@@ -160,8 +168,12 @@ int main(){
             cout << endl;
         }
         else if(*Option == 3) {
+            if (HeroesData::specialPower(heroName, YourData, EnemyHealth, EnemyDamage, iteration) == false) {
+                int cooldownTimeLeft = HeroesData::getPowerCooldown(iteration);
+                cout << "Your power is cooling down! wait for " << cooldownTimeLeft << (cooldownTimeLeft > 1?"rounds":"round") << endl;
+                goto playFlag;
+            }
             cout << PlayerName << " " << "use Ultimate Power!" << endl;
-            HeroesData::specialPower(heroName, YourData, EnemyHealth, EnemyDamage);
             cout << "=======================================" << endl;
             cout << "Your Health    : ";
             BarPrint(*YourHealth);
@@ -179,6 +191,12 @@ int main(){
             BarPrint(EnemyHealth);
             cout << endl;
             
+        }
+        else if(*Option == 5) {
+            cout << "Your Stats : " << endl;
+            showPlayerData(YourData);
+            cin.get();
+            goto playFlag;
         }
 
         sleep(500);
@@ -226,7 +244,7 @@ int main(){
     sleep(2500);
     
     string *YOrN = new string(); // Sumpah jelek bet penamaan ny maap
-    cout << "Mau lagi y/n? ";
+    cout << "Try Again? [y/n] ";
     cin >> *YOrN;
 
     if (*YOrN == "y") {
